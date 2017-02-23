@@ -1,9 +1,38 @@
 # Algorithms & Data Structures
 Here I'll be implementing the majority of popular algorithms and data structures that I know.
 
-I'm also following **MIT's** [6.006 Introduction to Algorithms](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/) program. Here you can find given material implemented in Java.
-
 ## Pull requests
 If you want to push some Algorithm implementations / Data Structures of your own - I'm sorry, I will not accept it since this repository is intented for studying only. Therefore, I should go through every existing structure and algorithm myself.
 
 **However**, if you want to correct some mistakes of mine or suggest/push **additional**  in-class implementations (for example, you know a recursive implementation of a method I have), you're more than welcome to do that.
+
+## MIT 6.006
+I'm also following **MIT's** [6.006 Introduction to Algorithms](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/) program. Here you can find given material implemented in Java.
+
+Progress:
+- [x] Lecture 1: Algorithmic Thinking, Peak Finding
+    - [x] Recitation 1: Asymptotic Complexity, Peak Finding
+- [x] Lecture 2: Models of Computation, Document Distance
+- [x] Lecture 3: Insertion Sort, Merge Sort
+- [x] Lecture 4: Heaps and Heap Sort
+- [x] Lecture 5: Binary Search Trees, BST Sort
+    - [x] Recitation 5: Recursion Trees, Binary Search Trees
+- [ ] Lecture 6: AVL Trees, AVL Sort
+- [ ] Lecture 7: Counting Sort, Radix Sort, Lower Bounds for Sorting
+- [ ] Lecture 8: Hashing with Chaining
+- [ ] Lecture 9: Table Doubling, Karp-Rabin
+- [ ] Lecture 10: Open Addressing, Cryptographic Hashing
+- [ ] Lecture 11: Integer Arithmetic, Karatsuba Multiplication
+- [ ] Lecture 12: Square Roots, Newton's Method
+- [ ] Lecture 13: Breadth-First Search (BFS)
+- [ ] Lecture 14: Depth-First Search (DFS), Topological Sort
+- [ ] Lecture 15: Single-Source Shortest Paths Problem
+- [ ] Lecture 16: Dijkstra
+- [ ] Lecture 17: Bellman-Ford
+- [ ] Lecture 18: Speeding up Dijkstra
+- [ ] Lecture 19: Dynamic Programming I: Fibonacci, Shortest Paths
+- [ ] Lecture 20: Dynamic Programming II: Text Justification, Blackjack
+- [ ] Lecture 21: Dynamic Programming III: Parenthesization, Edit Distance, Knapsack
+- [ ] Lecture 22: Dynamic Programming IV: Guitar Fingering, Tetris, Super Mario Bros.
+- [ ] Lecture 23: Computational Complexity
+- [ ] Lecture 24: Topics in Algorithms Research

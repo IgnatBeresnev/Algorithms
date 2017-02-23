@@ -12,7 +12,7 @@ public class MergeSort {
      * Merge sort
      * <p>
      * Time complexity:
-     * O(n log n)
+     * O(n log n). height + #leaves?
      * Worst space complexity:
      * O(n)
      * <p>

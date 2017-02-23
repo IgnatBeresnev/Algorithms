@@ -48,6 +48,7 @@ public class MatrixPeak {
         // avoiding computation of average overflow
         int midColumn = (fromColumn + toColumn) >>> 1;
 
+        // linear search
         int biggestInColumn = Integer.MIN_VALUE;
         int biggestValueRow = 0;
         for (int i = 0; i < matrix.length; i++) {
