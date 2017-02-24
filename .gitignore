@@ -1,3 +1,4 @@
 /.idea
-/Algorithms.iml
+/src/main/java/me/beresnev/ignore
 /target
+/Algorithms.iml

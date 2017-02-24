@@ -2,12 +2,14 @@ package me.beresnev.datastructures.trees;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.2
  * @since 21.02.17.
  */
 public class BinarySearchTree<K extends Comparable<K>, V> {
 
-    private Node<K, V> root;
+    Node<K, V> root;
+    private int treeSize = 0;
+    private int arrayIndex = 0; // for the getArray method
 
     /**
      * Binary Search Tree
@@ -27,50 +29,49 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * Adds the key and value into the tree. If given key
-     * is already in the tree, override its value to given.
-     * Keeps going down the tree, comparing with current along
-     * the way to find the correct position for new pair.
-     * Stops when current = null, and creates a new node.
+     * Public method for insertion. Returns nothing.
      */
     public void insert(K key, V value) {
+        insertAndReturn(key, value);
+    }
+
+    /**
+     * Adds the key and value into the tree. Keeps going down
+     * the tree, comparing with current along the way to find
+     * the correct position for new pair. Stops when current = null,
+     * and creates a new node.
+     *
+     * @return the node it has just added, needed for AVL rebalancing.
+     * @see AVL#insert(Comparable, Object)
+     */
+    Node<K, V> insertAndReturn(K key, V value) {
+        treeSize++;
         if (root == null) {
             root = new Node<>(key, value);
-            return;
+            return root;
         }
 
         Node<K, V> current = root;
         while (true) {
+            current.height++;
             int compare = key.compareTo(current.key);
             if (compare < 0 && current.left == null) {
                 current.left = new Node<>(current, key, value);
-                return;
-            } else if (compare > 0 && current.right == null) {
+                return current.left;
+            } else if (compare >= 0 && current.right == null) {
                 current.right = new Node<>(current, key, value);
-                return;
-            } else if (compare == 0) {
-                current.value = value;
-                return;
+                return current.right;
             }
             current = compare < 0 ? current.left : current.right;
         }
     }
 
     /**
-     * Puts the key in the tree if given key is absent.
-     * To override the value, use insert method.
-     */
-    public void insertIfAbsent(K key, V value) {
-        root = recursiveInsert(root, null, key, value);
-    }
-
-    /**
-     * Doesn't deal with duplicates. If it finds the same key as given, just returns.
+     * Same as insert method, only recursive. !!! Does NOT support height.
      *
-     * @param node   starting node, whose children to compare (recurrence)
+     * @param node   node whose children to compare (recursive)
      * @param parent node's parent. By default null, then == prev. node
-     * @return recur until node == null, make new node.
-     * then unfold and return root.
+     * @return recur until node == null, make new node then unfold and return root.
      */
     private Node<K, V> recursiveInsert(Node<K, V> node, Node<K, V> parent, K key, V value) {
         if (node == null) return new Node<>(parent, key, value);
@@ -78,148 +79,94 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         int compare = key.compareTo(node.key);
         if (compare < 0) {
             node.left = recursiveInsert(node.left, node, key, value);
-        } else if (compare > 0) {
+        } else if (compare >= 0) {
             node.right = recursiveInsert(node.right, node, key, value);
         }
         return node; // always returns root, also as compare == 0
     }
 
     /**
-     * First looks for the node, if it exists - cool, get it. If not, return.
-     * Then we find biggest key among node.left (typically - it's the furthest
-     * right element in there. But if our left child has no right children of
-     * its own, then our left child == the biggest. In this case it's simple,
-     * we just change its parent to old.parent and then do new.right = old.right.
-     * If, however, we get some distant node from the depth of the tree, we untie
-     * it from the parent (and it has no children by definition), then put it in
-     * place of the old (change parent, left and right). Job done. If node to
-     * remove is root, almost the same, but without changing parents, root has none.
-     *
-     * @param key node to remove by key
-     * @see #removeRoot()
+     * Public method for removing an element. Returns nothing
      */
     public void remove(K key) {
-        Node<K, V> nodeToRemove = getNode(key);
-        if (nodeToRemove == null) return;
-        if (nodeToRemove == root) {
-            removeRoot();
-            return;
-        }
-
-        if (nodeToRemove.hasBothChildren()) {
-            Node<K, V> replacementNode = getMaxNode(nodeToRemove.left);
-            if (replacementNode == nodeToRemove.left) {
-                // look at javadoc as to why it's different in this case
-                replaceNodesParent(nodeToRemove, replacementNode);
-                replacementNode.right = nodeToRemove.right;
-            } else {
-                untieNodeFromParent(replacementNode);
-                replaceNodesParent(nodeToRemove, replacementNode);
-                replacementNode.right = nodeToRemove.right;
-                replacementNode.left = nodeToRemove.left;
-            }
-        } else {
-            if (nodeToRemove.hasNoChildren())
-                removeNodeNoChildren(nodeToRemove);
-            else // at this point must have at least 1 child
-                moveNodeUpOneChild(nodeToRemove);
-        }
+        removeAndReturnParent(key);
     }
 
     /**
-     * Removes the root, for the most part
-     * using the same logic as the remove method.
+     * When deleting an element, one of three situations will occurr:
+     * Node to be deleted 1) has no children; 2) has 1 child; 3) has both
+     * We need to check for children and act based on that. Deletion logic:
+     * 1) Check if node is childless. If so, just delete parent's pointer
+     * to the child. In every case, node to delete will have old parent pointer.
+     * 2) else check if it has only 1 child. If so, just move the child up
+     * a node. node.parent.right/left = node.right/left + update child.parent
+     * 3) else it has both children. We need to find a replacement. It has to be
+     * => than node to delete, but <= than our right child to preserve BST structure.
+     * Use getMinNode on right child. Change value of node to be deleted (so that we
+     * don't have to update parent and right child pointers). Then update
+     * replace.parent.left/right to replace.right/left and update
+     * right/left parent pointers (if exist).
      *
-     * @see #remove(Comparable)
+     * @return parent of the removed node for further AVL tree balancing
+     * @see AVL#remove(Comparable)
      */
-    private void removeRoot() {
-        if (root.hasBothChildren()) {
-            Node<K, V> replacementNode = getMaxNode(root.left);
-            if (replacementNode == root.left) {
-                // if biggest on left is left child, then
-                // it has no right children. Just change root
-                // to left child and give root's right children.
-                root.left.parent = null;
-                root.left.right = root.right;
-                root = root.left;
-            } else {
-                untieNodeFromParent(replacementNode);
-                replacementNode.left = root.left;
-                replacementNode.right = root.right;
-                root = replacementNode;
+    Node<K, V> removeAndReturnParent(K key) {
+        Node<K, V> remove = getNode(key);
+        if (remove == null) return null;
+
+        Node<K, V> parent = remove.parent;
+        if (remove.left == null && remove.right == null) { // 1
+            if (parent.left == remove) {
+                parent.left = null;
+            } else if (parent.right == remove) {
+                parent.right = null;
             }
-        } else if (root.hasNoChildren()) {
-            root = null;
-        } else { // at least 1 child, just make it root
-            if (root.right != null) {
-                root.right.parent = null;
-                root = root.right;
+        } else if (remove.left == null || remove.right == null) { // 2
+            if (remove.left == null) {
+                if (parent.left == remove) {
+                    parent.left = remove.right;
+                } else {
+                    parent.right = remove.right;
+                }
+                remove.right.parent = parent;
             } else {
-                root.left.parent = null;
-                root = root.left;
+                if (parent.left == remove) {
+                    parent.left = remove.left;
+                } else {
+                    parent.right = remove.left;
+                }
+                remove.left.parent = parent;
+            }
+        } else { // 3
+            Node<K, V> replace = getMinNode(remove.right);
+            remove.key = replace.key;
+            remove.value = replace.value;
+            if (replace.parent.left == replace) {
+                replace.parent.left = replace.right;
+                if (replace.right != null) {
+                    replace.right.parent = replace.parent;
+                }
+            } else {
+                replace.parent.right = replace.right;
+                if (replace.right != null) {
+                    replace.right.parent = replace.parent;
+                }
             }
         }
+        treeSize--;
+        return parent;
     }
 
     /**
-     * We untie the node from its parent by removing the pointer
-     */
-    private void untieNodeFromParent(Node<K, V> node) {
-        if (node.isLeftChild()) {
-            node.parent.left = null;
-        } else {
-            node.parent.right = null;
-        }
-    }
-
-    /**
-     * newChild takes place of oldChild, will have same position (left/right)
-     *
-     * @param oldChild node whose parents should have new child
-     */
-    private void replaceNodesParent(Node<K, V> oldChild, Node<K, V> newChild) {
-        if (oldChild.isLeftChild()) {
-            oldChild.parent.left = newChild;
-        } else {
-            oldChild.parent.right = newChild;
-        }
-    }
-
-    /**
-     * Removes the node with no children. Just removes parent's pointer to node
-     */
-    private void removeNodeNoChildren(Node<K, V> node) {
-        if (node.isLeftChild()) {
-            node.parent.left = null;
-        } else {
-            node.parent.right = null;
-        }
-    }
-
-    /**
-     * Checks which child is not null (only 1 of em), and then moves it up
-     */
-    private void moveNodeUpOneChild(Node<K, V> node) {
-        if (node.right != null) {
-            node.parent.right = node.right;
-        } else if (node.left != null) {
-            node.parent.left = node.left;
-        }
-    }
-
-    /**
-     * Returns the value of the node, whose key == given
-     *
-     * @return value or null if key not found
+     * @return value of the node with given key
      */
     public V get(K key) {
-        Node<K, V> requested = getNode(key);
-        return requested != null ? requested.value : null;
+        Node<K, V> get = getNode(key);
+        return get == null ? null : get.value;
     }
 
     /**
-     * Goes through the whole tree, looking for given key.
-     * If it finds it, returns the node, if not - null.
+     * @return node with given key, null if not found
      */
     private Node<K, V> getNode(K key) {
         Node<K, V> currentNode = root;
@@ -232,16 +179,21 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
             if (compareResult < 0) {
                 if (currentNode.left == null) return null;
                 currentNode = currentNode.left;
-            } else if (compareResult > 0) {
+            } else if (compareResult >= 0) {
                 if (currentNode.right == null) return null;
                 currentNode = currentNode.right;
             }
         }
     }
 
+    // used for printing the tree as a graph.
+    // TODO: Remove after all of the tree tests are done
+    public Node<K, V> getRoot() {
+        return root;
+    }
+
     /**
-     * Taking advantage of get returning null if it doesn't
-     * find the key. We get null - return false.
+     * @return true if node with key exists, false otherwise
      */
     public boolean contains(K key) {
         return getNode(key) != null;
@@ -249,14 +201,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 
     /**
      * Keep going to the right until the end.
-     * Last element on the right - the biggest.
+     * Furthest right element - the biggest
+     *
+     * @return node where key > all other keys
      */
-    public K getMaxKey() {
-        if (root == null) return null;
-        return getMaxNode(root).key;
-    }
-
-    private Node<K, V> getMaxNode(Node<K, V> root) {
+    public Node<K, V> getMaxNode(Node<K, V> root) {
         Node<K, V> current = root;
         while (true) {
             if (current.right == null) {
@@ -268,14 +217,14 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 
     /**
      * Keep going to the left until the end.
-     * Left element on the left - the smallest.
+     * Furthest left element - the smallest.
+     * Method is useful to find replacement for removed element
+     *
+     * @return node where key < all other keys
+     * @see #removeAndReturnParent(Comparable)
      */
-    public K getMinKey() {
+    public Node<K, V> getMinNode(Node<K, V> root) {
         if (root == null) return null;
-        return getMinNode(root).key;
-    }
-
-    private Node<K, V> getMinNode(Node<K, V> root) {
         Node<K, V> current = root;
         while (true) {
             if (current.left == null) {
@@ -286,35 +235,80 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * Prints the whole ordered tree in the console
+     * @return node that follows after the node with given key
+     * returns null if node.right == null or if node(key) == null
      */
-    public void print() {
-        print(root);
+    public Node<K, V> getSuccessor(K key) {
+        Node<K, V> node = getNode(key);
+        return node == null ? null : node.right;
     }
 
     /**
-     * Private method for display above. Recurs deep
-     * until the furthest left element, which is min,
-     * and then unfolds, printing everything along
-     * the way. Goes til the end of right side (max).
-     * TODO: Could make another method that returns "sorted" array/list
-     *
-     * @see #print
+     * @return node's predecessor (parent). null if
+     * node.parent == null or if node(key) == null
      */
-    private void print(Node<K, V> node) {
+    public Node<K, V> getPredecessor(K key) {
+        Node<K, V> node = getNode(key);
+        return node == null ? null : node.parent;
+    }
+
+    /**
+     * @return tree size (number of elements)
+     */
+    public int size() {
+        return treeSize;
+    }
+
+    /**
+     * Prints the whole ordered by key tree
+     */
+    public void printKeys() {
+        printKeys(root);
+        System.out.println(); // to make next print on new line
+    }
+
+    /**
+     * Recurs deep until the furthest left element, which is min,
+     * and then unfolds, printing everything along the way.
+     */
+    private void printKeys(Node<K, V> node) {
         // stops at node.left || node.right, they're null
         if (node != null) {
-            print(node.left);
-            System.out.print(" " + node.key);
-            print(node.right);
+            printKeys(node.left);
+            if (node == root)
+                System.out.printf("[%s] ", node.key);
+            else System.out.print(node.key + " ");
+            printKeys(node.right);
         }
     }
 
-    private static class Node<K, V> {
-        private final K key;
-        private Node<K, V> parent;
-        private Node<K, V> left;
-        private Node<K, V> right;
+    /**
+     * @return sorted by key array, somewhat an entrySet
+     */
+    public Node[] getArray() {
+        Node[] array = new Node[treeSize];
+        fillArray(array, root);
+        arrayIndex = 0; // putting it back to 1
+        return array;
+    }
+
+    /**
+     * @see #printKeys(Node) for more details
+     */
+    private void fillArray(Node[] array, Node<K, V> node) {
+        if (node != null) {
+            fillArray(array, node.left);
+            array[arrayIndex++] = node;
+            fillArray(array, node.right);
+        }
+    }
+
+    public static class Node<K, V> {
+        Node<K, V> parent;
+        Node<K, V> left;
+        Node<K, V> right; //
+        int height = 0;
+        private K key;
         private V value;
 
         private Node(K key, V value) {
@@ -328,16 +322,22 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
             this.value = value;
         }
 
-        private boolean isLeftChild() {
-            return parent.left == this;
+        /**
+         * Used by user when we return a node/nodes
+         *
+         * @see #getArray()
+         * @see #getMaxNode(Node)
+         * @see #getMinNode(Node)
+         */
+        public K getKey() {
+            return key;
         }
 
-        private boolean hasBothChildren() {
-            return left != null && right != null;
-        }
-
-        private boolean hasNoChildren() {
-            return left == null && right == null;
+        /**
+         * @see #getKey()
+         */
+        public V getValue() {
+            return value;
         }
     }
 }

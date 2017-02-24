@@ -17,7 +17,7 @@ Progress:
 - [x] Lecture 4: Heaps and Heap Sort
 - [x] Lecture 5: Binary Search Trees, BST Sort
     - [x] Recitation 5: Recursion Trees, Binary Search Trees
-- [ ] Lecture 6: AVL Trees, AVL Sort
+- [X] Lecture 6: AVL Trees, AVL Sort
 - [ ] Lecture 7: Counting Sort, Radix Sort, Lower Bounds for Sorting
 - [ ] Lecture 8: Hashing with Chaining
 - [ ] Lecture 9: Table Doubling, Karp-Rabin

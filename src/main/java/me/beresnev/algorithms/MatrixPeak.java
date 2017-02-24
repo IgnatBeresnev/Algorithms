@@ -16,6 +16,8 @@ public class MatrixPeak {
      * {0, 2, 0} | X is the peak IF and only IF
      * {3, 5, 1} | X >= top, bottom, left and right
      * {0, 4, 0} | neighbours. In this example, 5 is the peak
+     *
+     * @see ArrayPeak to find 1D peak
      */
     private MatrixPeak() {
     }

@@ -11,6 +11,8 @@ public class ArrayPeak {
      * Finds a peak in a sorted array.
      * Time complexity:
      * O(logN) - binary Search
+     *
+     * @see MatrixPeak to find 2D peak
      */
     private ArrayPeak() {
     }
