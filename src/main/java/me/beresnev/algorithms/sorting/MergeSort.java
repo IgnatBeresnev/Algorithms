@@ -85,7 +85,7 @@ public class MergeSort {
 
         for (int i = low; i <= high; i++) {
             if (leftPointer <= middle && rightPointer <= high) {
-                if (arr[leftPointer] < arr[rightPointer]) {
+                if (arr[leftPointer] < arr[rightPointer]) { // TODO: Check stability if change < to =<
                     temp[i] = arr[leftPointer++];
                 } else {
                     temp[i] = arr[rightPointer++];

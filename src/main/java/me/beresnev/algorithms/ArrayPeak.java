@@ -23,6 +23,7 @@ public class ArrayPeak {
      * @return peak, whose value is >= of both neighbours.
      */
     public static int find(int[] arr) {
+        if (arr.length == 0) return -1;
         return binaryPeakSearch(arr, 0, arr.length - 1);
     }
 

@@ -1,12 +1,14 @@
 package me.beresnev.algorithms;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 14.02.17.
  */
 
@@ -48,6 +50,9 @@ public class DocumentDistance {
      * very wrong results. Moreover, we don't need that precision.
      */
     public static float getAngle(File d1, File d2) {
+        if (!d1.exists() || !d2.exists()) return -1f;
+        if (d1 == d2) return 0.0f;
+
         Map<String, Integer> d1Words = countWords(d1);
         Map<String, Integer> d2Words = countWords(d2);
         return (float) Math.acos(getInnerProduct(d1Words, d2Words) / (getNorm(d1Words) * getNorm(d2Words)));
@@ -95,6 +100,7 @@ public class DocumentDistance {
      * @param file to count words in
      * @return map filled with words as keys and number of occurrences as values.
      */
+    @SuppressFBWarnings("DM_DEFAULT_ENCODING")
     private static Map<String, Integer> countWords(File file) {
         Map<String, Integer> map = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

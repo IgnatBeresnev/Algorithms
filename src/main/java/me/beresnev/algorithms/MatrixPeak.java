@@ -27,6 +27,7 @@ public class MatrixPeak {
      * @return value of the peak
      */
     public static int find(int[][] matrix) {
+        if (matrix.length == 0) return 0;
         return getMatrixPeak(matrix, 0, matrix[0].length - 1);
     }
 

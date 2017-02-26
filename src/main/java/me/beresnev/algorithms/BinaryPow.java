@@ -2,7 +2,7 @@ package me.beresnev.algorithms;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 24.02.17.
  */
 public class BinaryPow {
@@ -29,16 +29,18 @@ public class BinaryPow {
      * <p>
      * For odd numbers, we do n-1, making it even, then count
      * and multiply by number. Basically this: a^(n-1) * a
+     *
+     * @return 0 if pow is negative, 1 if pow == 0, result otherwise
      */
     public static int pow(int number, int pow) {
+        if (pow < 0) return 0;
         if (pow == 0) {
             return 1;
         }
-        if (pow % 2 == 1) {
+        if ((pow & 1) == 1) { // n % 2
             return pow(number, pow - 1) * number;
         } else {
             int b = pow(number, pow / 2);
-            System.out.println(b + " * " + b);
             return b * b;
         }
     }
@@ -50,14 +52,15 @@ public class BinaryPow {
      * @see #powWhileOptimized(int, int) for ompimized version
      */
     public static int powWhile(int number, int pow) {
+        if (pow < 0) return 0;
         int res = 1;
         int a = number;
         int n = pow;
         while (n > 0)
-            if (n % 2 == 1) {
+            if ((pow & 1) == 1) { // n % 2
                 res = res * a;
                 n--;
-            } else { // n % 2 == 0
+            } else {
                 a = a * a;
                 n = n / 2;
             }

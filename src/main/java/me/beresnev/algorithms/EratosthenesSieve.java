@@ -1,10 +1,12 @@
 package me.beresnev.algorithms;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 24.02.17.
  */
 public class EratosthenesSieve {
@@ -28,10 +30,30 @@ public class EratosthenesSieve {
     }
 
     /**
+     * It's probably not the best way to get an array with primes
+     * (an int array, not boolean). However, I've used this class to test
+     * the correctness of initPrimesArray method.
+     */
+    public static Integer[] getPrimes(int limitNumber) {
+        if (limitNumber <= 0) return null;
+        boolean[] primes = initPrimesArray(limitNumber);
+        List<Integer> primesList = new LinkedList<>();
+        for (int i = 0; i < limitNumber; i++) {
+            if (primes[i]) {
+                primesList.add(i);
+            }
+        }
+        return primesList.toArray(new Integer[primesList.size()]);
+    }
+
+    /**
+     * For the description of the method, look at the constructors javadoc.
+     *
      * @param limitNumber initializes array from 0 to limitNumber inclusive.
      * @return boolean array, where if array[i] == true, i == prime
      */
     public static boolean[] initPrimesArray(int limitNumber) {
+        if (limitNumber <= 0) return null;
         boolean[] primes = new boolean[limitNumber + 1];
         Arrays.fill(primes, Boolean.TRUE);
         primes[0] = primes[1] = false; // we know that 0 & 1 != prime

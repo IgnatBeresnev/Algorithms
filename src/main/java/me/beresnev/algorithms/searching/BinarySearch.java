@@ -2,7 +2,7 @@ package me.beresnev.algorithms.searching;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 20.02.17.
  */
 public class BinarySearch {
@@ -27,7 +27,7 @@ public class BinarySearch {
     public static int getIndex(int[] arr, int target) {
         if (arr.length == 1)
             return 0; // if there's 1 element, then it's the peak.
-        if (target < arr[0] || target > arr[arr.length - 1])
+        if (target > arr[0] && target > arr[arr.length - 1])
             throw new IllegalArgumentException("Value is not in the array or array is not sorted");
         return binarySearch(arr, target, 0, arr.length - 1);
     }
@@ -60,12 +60,14 @@ public class BinarySearch {
             int mid = (low + high) >>> 1;
             int midVal = arr[mid];
 
-            if (midVal < target)
-                low = mid + 1;
-            else if (midVal > target)
-                high = mid - 1;
-            else
-                return mid; // key found
+            if (midVal == target) {
+                return mid;
+            } else {
+                if (arr[mid - 1] < midVal)
+                    low = mid + 1;
+                else
+                    high = mid - 1;
+            }
         }
         return -1;
     }
@@ -89,12 +91,13 @@ public class BinarySearch {
         int mid = (fromIndex + toIndex) >>> 1;
         int midVal = arr[mid];
 
-        if (midVal < target)
-            // go right
-            return recursiveBinarySearch(arr, target, mid + 1, toIndex);
-        else if (midVal > target)
-            return recursiveBinarySearch(arr, target, fromIndex, mid - 1);
-        else
-            return mid; // target found
+        if (midVal == target) {
+            return mid;
+        } else {
+            if (arr[mid - 1] < midVal)
+                return recursiveBinarySearch(arr, target, mid + 1, toIndex);
+            else
+                return recursiveBinarySearch(arr, target, fromIndex, mid - 1);
+        }
     }
 }
