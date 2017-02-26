@@ -2,7 +2,7 @@ package me.beresnev.algorithms.sorting;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 25.02.17.
  */
 public class CountingSort {
@@ -32,11 +32,18 @@ public class CountingSort {
      * than arr.length, the elements in freq that are > 0 == arr.length
      *
      * @param maxValue maximum value of an element we can encounter in arr
+     * @throws IllegalArgumentException if it gets a negative number
      */
     public static void simpleSort(int[] arr, int maxValue) {
+        if (arr.length < 2)
+            return;
+        if (maxValue < 1) // if it's 0 or negative, we can't sort.
+            throw new IllegalArgumentException("Max number is too low");
+
         int[] frequency = new int[maxValue + 1];
-        for (int anArr : arr) {
-            frequency[anArr]++;
+        for (int value : arr) {
+            if (value < 0) throw new IllegalArgumentException("Only positive numbers");
+            frequency[value]++;
         }
 
         int b = 0; // keeping track of the position
@@ -80,13 +87,20 @@ public class CountingSort {
      *
      * @param arr      input array with object to be sorted by key
      * @param maxValue value of the biggest element in that array
+     * @throws IllegalArgumentException if it gets a negative number
      * @return new sorted array
      */
     public static int[] stableIntSort(int[] arr, int maxValue) {
+        if (arr.length < 2)
+            return arr;
+        if (maxValue < 1) // if it's 0 or negative, we can't sort.
+            throw new IllegalArgumentException("Max number is too low");
+
         int[] pos = new int[maxValue + 1];
         int[] out = new int[arr.length];
 
         for (int value : arr) { // 1
+            if (value < 0) throw new IllegalArgumentException("Only positive numbers");
             pos[value]++;
         }
 
@@ -118,14 +132,21 @@ public class CountingSort {
      * numeric representation of the class, but it has to be int (i.e number)
      *
      * @param max value of the biggest element in that array
+     * @throws IllegalArgumentException if it gets a negative number
      * @return new sorted array
      */
     public static SomeObject[] stableObjectSort(SomeObject[] arr, int max) {
+        if (arr.length < 2)
+            return arr;
+        if (max < 1) // if it's 0 or negative, we can't sort.
+            throw new IllegalArgumentException("Max number is too low");
+
         SomeObject[] out = new SomeObject[arr.length];
         int[] pos = new int[max + 1];
 
-        for (SomeObject anArr : arr) {
-            pos[anArr.key]++;
+        for (SomeObject obj : arr) {
+            if (obj.key < 0) throw new IllegalArgumentException("Only positive numbers");
+            pos[obj.key]++;
         }
 
         int carry = 0;

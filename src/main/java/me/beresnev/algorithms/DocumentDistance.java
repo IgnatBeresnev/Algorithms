@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * @author Ignat Beresnev
- * @version 1.1
+ * @version 1.2
  * @since 14.02.17.
  */
 
@@ -50,8 +50,10 @@ public class DocumentDistance {
      * very wrong results. Moreover, we don't need that precision.
      */
     public static float getAngle(File d1, File d2) {
-        if (!d1.exists() || !d2.exists()) return -1f;
-        if (d1 == d2) return 0.0f;
+        if (!d1.exists() || !d2.exists())
+            throw new IllegalArgumentException("File doesn't exist");
+        if (d1 == d2)
+            throw new IllegalArgumentException("Both params are the same one file");
 
         Map<String, Integer> d1Words = countWords(d1);
         Map<String, Integer> d2Words = countWords(d2);

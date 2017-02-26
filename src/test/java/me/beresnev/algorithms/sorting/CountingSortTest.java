@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 25.02.17.
  */
 public class CountingSortTest {
@@ -45,6 +45,58 @@ public class CountingSortTest {
 
         Arrays.sort(array);
         CountingSort.simpleSort(copy, 40);
+
+        Assert.assertArrayEquals(array, copy);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void negativeSort() {
+        int[] array = ArrayInitializer.getNegativeArray(20);
+        int[] copy = ArrayInitializer.getCopyOf(array);
+        int[] copy1 = ArrayInitializer.getCopyOf(array);
+
+        Arrays.sort(array);
+        CountingSort.simpleSort(copy, 99);
+        CountingSort.stableIntSort(copy1, 99);
+    }
+
+    @Test
+    public void badArgumentArray() {
+        int[] array = new int[]{}; // nothing should happen, nothing to sort
+        CountingSort.simpleSort(array, 40);
+        CountingSort.stableIntSort(array, 40);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void badArgumentMaxValue() {
+        int[] array = ArrayInitializer.getNegativeArray(20);
+        CountingSort.simpleSort(array, -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void badArgumentStableMaxValue() {
+        int[] array = ArrayInitializer.getNegativeArray(20);
+        CountingSort.stableIntSort(array, -1);
+    }
+
+    @Test
+    public void straightArray() {
+        int[] array = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1};
+        int[] copy = ArrayInitializer.getCopyOf(array);
+
+        Arrays.sort(array);
+        CountingSort.simpleSort(copy, 40);
+
+        Assert.assertArrayEquals(array, copy);
+    }
+
+    @Test
+    public void straightStableArray() {
+        int[] array = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1};
+        int[] copy = ArrayInitializer.getCopyOf(array);
+
+        Arrays.sort(array);
+        CountingSort.stableIntSort(copy, 40);
 
         Assert.assertArrayEquals(array, copy);
     }

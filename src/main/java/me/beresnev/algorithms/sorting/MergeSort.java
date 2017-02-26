@@ -2,7 +2,7 @@ package me.beresnev.algorithms.sorting;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 18.02.17.
  */
 public class MergeSort {
@@ -30,6 +30,8 @@ public class MergeSort {
      * @see #sortReturn(int[])
      */
     public static void sort(int[] arr) {
+        if (arr.length < 2) return;
+
         int[] temp = new int[arr.length];
         mergesort(arr, temp, 0, arr.length - 1);
     }
@@ -107,7 +109,7 @@ public class MergeSort {
      * @return sorted arr
      */
     public static int[] sortReturn(int[] arr) {
-        if (arr.length == 1) return arr;
+        if (arr.length < 2) return arr;
 
         int mid = arr.length / 2;
         int[] left = new int[mid];

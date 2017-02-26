@@ -39,6 +39,8 @@ public class InsertionSort {
      * the left neighbour (i - 1) straight away. Don't want to get NPE, do we?
      */
     public static void sort(int[] arr) {
+        if (arr.length < 2) return;
+
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] < arr[i - 1]) {
                 findPlace(arr, i);

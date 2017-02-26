@@ -40,6 +40,8 @@ public class BubbleSort {
      * This way with n = 11, we're checking 66 elements instead of 132 (if we check everything)
      */
     public static void sort(int[] arr) {
+        if (arr.length < 2) return; // 1 element is already sorted
+
         for (int i = 0; i < arr.length; i++) {
             boolean swapFlag = false;
 

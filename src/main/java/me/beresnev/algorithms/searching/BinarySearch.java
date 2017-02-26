@@ -25,8 +25,11 @@ public class BinarySearch {
      * is sorted at this point in time.
      */
     public static int getIndex(int[] arr, int target) {
-        if (arr.length == 1)
-            return 0; // if there's 1 element, then it's the peak.
+        if (arr.length < 2) {
+            if (arr.length == 1 && arr[0] == target)
+                return 0;
+            return -1; // nothing to look at
+        }
         if (target > arr[0] && target > arr[arr.length - 1])
             throw new IllegalArgumentException("Value is not in the array or array is not sorted");
         return binarySearch(arr, target, 0, arr.length - 1);

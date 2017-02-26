@@ -5,7 +5,7 @@ import org.junit.Test;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 26.02.17.
  */
 public class BinarySearchTest {
@@ -35,5 +35,19 @@ public class BinarySearchTest {
     public void doesntExist() {
         int[] array = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
         int result = BinarySearch.getIndex(array, 44);
+    }
+
+    @Test
+    public void emptyArray() {
+        int[] array = new int[]{};
+        int result = BinarySearch.getIndex(array, 44);
+        Assert.assertEquals(result, -1);
+    }
+
+    @Test
+    public void oneElementArray() {
+        int[] array = new int[]{5};
+        int result = BinarySearch.getIndex(array, 5);
+        Assert.assertEquals(result, 0);
     }
 }

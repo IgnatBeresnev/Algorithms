@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 25.02.17.
  */
 public class ArrayInitializer {
@@ -14,7 +14,8 @@ public class ArrayInitializer {
 
     /**
      * Simple class that generates arrays for tests. This way
-     * I can write minimum amount of code needed for testing.
+     * I can write minimum amount of code needed for testing
+     * and maximize randomness of the tests.
      */
     private ArrayInitializer() {
     }
@@ -41,5 +42,17 @@ public class ArrayInitializer {
         int[] copy = new int[inputArray.length];
         System.arraycopy(inputArray, 0, copy, 0, inputArray.length);
         return copy;
+    }
+
+    /**
+     * @return array filled with negative numbers in the range of -100; -20
+     */
+    public static int[] getNegativeArray(int length) {
+        int[] array = new int[length];
+        for (int i = 0; i < length; i++) {
+            array[i] = (-100 + random.nextInt(80));
+        }
+        System.out.println("Generated array: " + Arrays.toString(array));
+        return array;
     }
 }

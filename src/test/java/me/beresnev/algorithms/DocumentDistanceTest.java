@@ -7,7 +7,7 @@ import java.io.File;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 26.02.17.
  */
 public class DocumentDistanceTest {
@@ -18,16 +18,14 @@ public class DocumentDistanceTest {
     private File fourthFile = new File("src/test/testResources/DD/FourthFile");
     private File fifthFile = new File("src/test/testResources/DD/fifthFile");
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void fileDoesntExist() {
-        double distance = DocumentDistance.getAngle(firstFile, fifthFile);
-        Assert.assertTrue(distance == -1);
+        DocumentDistance.getAngle(firstFile, fifthFile);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void sameFile() {
-        double distance = DocumentDistance.getAngle(firstFile, firstFile);
-        Assert.assertTrue(distance == 0.0f);
+        DocumentDistance.getAngle(firstFile, firstFile);
     }
 
     @Test

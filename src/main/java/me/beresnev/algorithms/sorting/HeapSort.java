@@ -29,6 +29,7 @@ public class HeapSort {
      * the new root (biggest number) and place it at [0]. Repeat.
      */
     public static void sort(int[] arr) {
+        if (arr.length < 2) return;
         int totalLeft = arr.length - 1;
         buildMaxHeap(arr, totalLeft);
 

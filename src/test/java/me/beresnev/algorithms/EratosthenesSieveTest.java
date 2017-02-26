@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 26.02.17.
  */
 public class EratosthenesSieveTest {
@@ -40,9 +40,8 @@ public class EratosthenesSieveTest {
         Assert.assertArrayEquals(primesArrayFromFile, eratosthenesSievePrimes);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void negativeParam() {
-        Integer[] eratosthenesSievePrimes = EratosthenesSieve.getPrimes(-300);
-        Assert.assertEquals(eratosthenesSievePrimes, null);
+        EratosthenesSieve.getPrimes(-300);
     }
 }

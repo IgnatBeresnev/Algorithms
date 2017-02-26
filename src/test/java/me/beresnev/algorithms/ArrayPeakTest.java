@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 26.02.17.
  */
 public class ArrayPeakTest {
@@ -55,6 +55,13 @@ public class ArrayPeakTest {
     @Test
     public void nullArray() {
         int[] array = new int[]{};
+        int peak = ArrayPeak.find(array);
+        Assert.assertEquals(peak, -1);
+    }
+
+    @Test
+    public void negativeNumbers() {
+        int[] array = new int[]{-5, -4, -3, -1, -2, -3, -10};
         int peak = ArrayPeak.find(array);
         Assert.assertEquals(peak, -1);
     }

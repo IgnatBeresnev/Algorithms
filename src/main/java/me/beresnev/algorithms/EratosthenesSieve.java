@@ -35,7 +35,8 @@ public class EratosthenesSieve {
      * the correctness of initPrimesArray method.
      */
     public static Integer[] getPrimes(int limitNumber) {
-        if (limitNumber <= 0) return null;
+        if (limitNumber <= 0)
+            throw new IllegalArgumentException("Can't count negative numbers");
         boolean[] primes = initPrimesArray(limitNumber);
         List<Integer> primesList = new LinkedList<>();
         for (int i = 0; i < limitNumber; i++) {

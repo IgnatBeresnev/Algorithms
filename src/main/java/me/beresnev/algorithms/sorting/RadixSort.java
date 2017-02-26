@@ -2,7 +2,7 @@ package me.beresnev.algorithms.sorting;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 25.02.17.
  */
 public class RadixSort {
@@ -51,12 +51,19 @@ public class RadixSort {
      * @see #lsdNoCopyingSort(int[], int) for lsd sort without arraycopy
      */
     public static int[] lsdSort(int[] arr, int maxValue) {
+        if (arr.length < 2)
+            return arr;
+        if (maxValue < 1) // if it's 0 or negative, we can't sort.
+            throw new IllegalArgumentException("Max number is too low");
+
         int[] out = new int[arr.length];
         int[] pos;
 
         for (int i = 1; maxValue / i > 0; i *= 10) { // see getDigit method
             pos = new int[10];
             for (int value : arr) {
+                if (value < 0)
+                    throw new IllegalArgumentException("Cannot sort array with negative numbers");
                 pos[getDigit(value, i)]++;
             }
 
@@ -85,6 +92,11 @@ public class RadixSort {
      * @see #radixCountingSort(int[], int) for sorting
      */
     public static int[] lsdNoCopyingSort(int[] arr, int maxValue) {
+        if (arr.length < 2)
+            return arr;
+        if (maxValue < 1) // if it's 0 or negative, we can't sort.
+            throw new IllegalArgumentException("Max number is too low");
+
         for (int i = 1; maxValue / i > 0; i *= 10) {
             arr = radixCountingSort(arr, i);
         }
@@ -103,6 +115,8 @@ public class RadixSort {
         int[] pos = new int[10];
 
         for (int value : arr) {
+            if (value < 0)
+                throw new IllegalArgumentException("Cannot sort array with negative numbers");
             pos[getDigit(value, base)]++;
         }
 
