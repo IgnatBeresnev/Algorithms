@@ -49,8 +49,7 @@ public class CountingSort {
         int b = 0; // keeping track of the position
         for (int i = 0; i < frequency.length; i++) {
             for (int j = 0; j < frequency[i]; j++) {
-                arr[b] = i;
-                b++;
+                arr[b++] = i;
             }
         }
     }

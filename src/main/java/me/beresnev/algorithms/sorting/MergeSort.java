@@ -92,7 +92,7 @@ public class MergeSort {
                 } else {
                     temp[i] = arr[rightPointer++];
                 }
-            } else if (leftPointer <= middle) { // докладываем последний элемент
+            } else if (leftPointer <= middle) { // adding the last element
                 temp[i] = arr[leftPointer++];
             } else {
                 temp[i] = arr[rightPointer++];
@@ -115,7 +115,7 @@ public class MergeSort {
         int[] left = new int[mid];
         int[] right = new int[mid + arr.length % 2];
 
-        int j = 0; // для добавления b
+        int j = 0;
         for (int i = 0; i < arr.length; i++) {
             if (i < mid) {
                 left[i] = arr[i];
@@ -123,8 +123,7 @@ public class MergeSort {
                 right[j++] = arr[i];
             }
         }
-        // В первый раз считывает, пока размер левого и правого не будет по одному.
-        // Потом склеивает левый и правый.
+        // keeps going until there's 1 element in each array[]
         return mergeReturn(sortReturn(left), sortReturn(right));
     }
 
@@ -145,7 +144,7 @@ public class MergeSort {
                 } else {
                     merged[i] = rightArr[rightPointer++];
                 }
-            } else if (leftPointer < leftArr.length) { // докладываем последний элемент
+            } else if (leftPointer < leftArr.length) { // adding the last element
                 merged[i] = leftArr[leftPointer++];
             } else {
                 merged[i] = rightArr[rightPointer++];

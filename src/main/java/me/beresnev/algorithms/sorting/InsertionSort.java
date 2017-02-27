@@ -64,6 +64,24 @@ public class InsertionSort {
         }
     }
 
+    /**
+     * A very short and down to business implementation I've seen on the net.
+     * Same logic applies as describer above. Takes comparable.
+     *
+     * @author growingwiththeweb.com
+     * @see BucketSort#sortWithInsertion(int[]) for when I used it
+     */
+    public static <T extends Comparable<T>> void comparableSort(T[] array) {
+        for (int i = 1; i < array.length; i++) {
+            T item = array[i];
+            int indexHole = i;
+            while (indexHole > 0 && array[indexHole - 1].compareTo(item) > 0) {
+                array[indexHole] = array[--indexHole];
+            }
+            array[indexHole] = item;
+        }
+    }
+
     private static void swap(int[] arr, int a, int b) {
         int temp = arr[a];
         arr[a] = arr[b];

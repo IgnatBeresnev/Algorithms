@@ -5,7 +5,7 @@
 - [ ] Prefix function (e-maxx.ru)
 - [ ] Red and black tree balancing
 - [ ] Check Merge sort stability if you change < to <=
-- [ ] Do more fail-tests for sorting
+- [ ] Pigeonhole sort
 
 
 ## Other
@@ -15,6 +15,7 @@
 ## Done
 - [x] Make a to do list.
 - [x] AVL balancing + rotations
-- [X] BST next largest/smaller (successor/predecessor)
-- [X] Binary pow
-- [X] Eratosthenes sieve (e-maxx.ru)
+- [x] BST next largest/smaller (successor/predecessor)
+- [x] Binary pow
+- [x] Eratosthenes sieve (e-maxx.ru)
+- [x] Do more fail-tests for sorting
