@@ -6,6 +6,7 @@
 - [ ] Red and black tree balancing
 - [ ] Check Merge sort stability if you change < to <=
 - [ ] Pigeonhole sort
+- [ ] Expand hashCode, read Bloch's answer
 
 
 ## Other
@@ -19,3 +20,4 @@
 - [x] Binary pow
 - [x] Eratosthenes sieve (e-maxx.ru)
 - [x] Do more fail-tests for sorting
+- [x] Add class for hashcode generation

@@ -155,7 +155,7 @@ public class AVL<K extends Comparable<K>, V> extends BinarySearchTree<K, V> {
      * @return node height or -1 if node == null
      * @see #updateHeight(Node) for why we return -1
      */
-    int getNodeHeight(Node<K, V> node) {
+    private int getNodeHeight(Node<K, V> node) {
         return node == null ? -1 : node.height;
     }
 
@@ -168,7 +168,7 @@ public class AVL<K extends Comparable<K>, V> extends BinarySearchTree<K, V> {
      * @param node node whose height to update
      * @see #getNodeHeight(Node) for height definition and more info
      */
-    void updateHeight(Node<K, V> node) {
+    private void updateHeight(Node<K, V> node) {
         node.height = Math.max(getNodeHeight(node.left), getNodeHeight(node.right)) + 1;
     }
 }
