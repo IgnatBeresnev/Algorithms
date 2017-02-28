@@ -20,7 +20,7 @@ Progress:
 - [x] Lecture 6: AVL Trees, AVL Sort
 - [x] Lecture 7: Counting Sort, Radix Sort, Lower Bounds for Sorting
     - [x] Recitation 7: Comparison Sort, Counting and Radix Sort
-- [ ] Lecture 8: Hashing with Chaining
+- [x] Lecture 8: Hashing with Chaining
 - [ ] Lecture 9: Table Doubling, Karp-Rabin
 - [ ] Lecture 10: Open Addressing, Cryptographic Hashing
 - [ ] Lecture 11: Integer Arithmetic, Karatsuba Multiplication

@@ -69,7 +69,6 @@ public class InsertionSort {
      * Same logic applies as describer above. Takes comparable.
      *
      * @author growingwiththeweb.com
-     * @see BucketSort#sortWithInsertion(int[]) for when I used it
      */
     public static <T extends Comparable<T>> void comparableSort(T[] array) {
         for (int i = 1; i < array.length; i++) {

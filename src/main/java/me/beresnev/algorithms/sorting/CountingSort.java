@@ -120,6 +120,8 @@ public class CountingSort {
 
         for (int value : arr) { // 3
             out[pos[value]] = value;
+            // = place next elem with same value right after us
+            // we have reserved space for you, buddy
             pos[value]++;
         }
         return out;

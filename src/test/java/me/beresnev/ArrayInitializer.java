@@ -31,7 +31,6 @@ public class ArrayInitializer {
         for (int i = 0; i < length; i++) {
             array[i] = random.nextInt(bound) + minValue;
         }
-        System.out.println("Generated array: " + Arrays.toString(array));
         return array;
     }
 

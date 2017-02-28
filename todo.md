@@ -4,10 +4,8 @@
 - [ ] Euler function (e-maxx.ru)
 - [ ] Prefix function (e-maxx.ru)
 - [ ] Red and black tree balancing
-- [ ] Check Merge sort stability if you change < to <=
 - [ ] Pigeonhole sort
 - [ ] Expand hashCode, read Bloch's answer
-
 
 ## Other
 - [ ] Cpu, cache, ram, assembly
