@@ -6,6 +6,8 @@
 - [ ] Red and black tree balancing
 - [ ] Pigeonhole sort
 - [ ] Expand hashCode, read Bloch's answer
+- [ ] null sorting, null comparison
+- [ ] Euclid algorithm
 
 ## Other
 - [ ] Cpu, cache, ram, assembly
