@@ -2,7 +2,7 @@ package me.beresnev.algorithms;
 
 /**
  * @author Ignat Beresnev
- * @version 1.1
+ * @version 1.2
  * @since 24.02.17.
  */
 public class BinaryPow {
@@ -32,7 +32,7 @@ public class BinaryPow {
      *
      * @return 0 if pow is negative, 1 if pow == 0, result otherwise
      */
-    public static int pow(int number, int pow) {
+    public static long pow(int number, int pow) {
         if (pow < 0) return 0;
         if (pow == 0) {
             return 1;
@@ -40,7 +40,7 @@ public class BinaryPow {
         if ((pow & 1) == 1) { // n % 2
             return pow(number, pow - 1) * number;
         } else {
-            int b = pow(number, pow / 2);
+            long b = pow(number, pow / 2);
             return b * b;
         }
     }
@@ -51,9 +51,9 @@ public class BinaryPow {
      *
      * @see #powWhileOptimized(int, int) for ompimized version
      */
-    public static int powWhile(int number, int pow) {
+    public static long powWhile(int number, int pow) {
         if (pow < 0) return 0;
-        int res = 1;
+        long res = 1;
         int a = number;
         int n = pow;
         while (n > 0)
@@ -73,8 +73,8 @@ public class BinaryPow {
      * the next cycle (since we do n--), so we just let it go and
      * multiply straight away, saving some cycles.
      */
-    public static int powWhileOptimized(int number, int pow) {
-        int res = 1;
+    public static long powWhileOptimized(int number, int pow) {
+        long res = 1;
         int a = number;
         int n = pow;
         while (n > 0) {
@@ -84,5 +84,20 @@ public class BinaryPow {
             n >>= 1;
         }
         return res;
+    }
+
+    /**
+     * @param number number to get pow for
+     * @param length = max power
+     * @return array with values number^1, number^2 ... number^length
+     */
+    public static long[] getAllPowFor(int number, int length) {
+        long[] arr = new long[length];
+
+        arr[0] = 1;
+        for (int i = 1; i < length; i++) {
+            arr[i] = arr[i - 1] * number;
+        }
+        return arr;
     }
 }
