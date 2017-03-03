@@ -28,6 +28,11 @@ public class StringHashing {
         return h;
     }
 
+    /**
+     * One way to calculate the hash of a string. Beware, these hashes
+     * are not Thue–Morse sequence proof, which means these hashes can be
+     * broken by the sequence. However, it is an optimal and small implementation.
+     */
     public static class Hash {
         private static final int PRIME = 239017;
 
@@ -35,9 +40,6 @@ public class StringHashing {
         private Long[] deg;
         private char[] values;
 
-        /**
-         * http://codeforces.com/blog/entry/17507
-         */
         Hash(String input) {
             values = input.toCharArray();
             fillHashes();
@@ -45,8 +47,8 @@ public class StringHashing {
 
         private void fillHashes() {
             int n = values.length;
-            h = new Long[n];
-            deg = new Long[n];
+            h = new Long[n]; // hashes of prefixes
+            deg = new Long[n]; // array with calculated pow degrees
 
             h[0] = 0L;
             deg[0] = 1L;
@@ -57,6 +59,14 @@ public class StringHashing {
             }
         }
 
+        /**
+         * Unlike getHash in AlternativeHash, this method returns the HASH
+         * of the L...R substring. In alternative, this would return the hash
+         * that is also multiplied by some degree of P, so we'd have to correct it
+         * ourselves.
+         * <p>
+         * To get h[L..R], we do h[0..R] - h[0..L]
+         */
         long getHash(int L, int R) {
             return h[R] - h[L] * deg[R - L];
         }
@@ -108,6 +118,10 @@ public class StringHashing {
 
         /**
          * hash(S[L..R]) = hash(S[0..R]) - hash(S[0..L])
+         * This would return the hash that is multiplied by some
+         * degree of P. So to get the TRUE hash, we'd have to multiply this
+         * to the missing degree of P. Look at the usage of this method
+         * in RabinKarp class to understand it.
          *
          * @param h hash for every prefix
          * @param L left index
@@ -119,15 +133,6 @@ public class StringHashing {
             if (L > 0)
                 result -= h[L - 1];
             return result;
-        }
-
-        /**
-         * Compare hashes of to substrings
-         */
-        public static boolean compareSubstringsHashes(String first, String second, int from, int to) {
-            long[] firstHash = getPrefixHashes(first.toCharArray());
-            long[] secondHash = getPrefixHashes(second.toCharArray());
-            return getAltHash(firstHash, from, to) == getAltHash(secondHash, from, to);
         }
     }
 }
