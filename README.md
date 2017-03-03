@@ -23,7 +23,7 @@ Progress:
 - [x] Lecture 8: Hashing with Chaining
 - [x] Lecture 9: Table Doubling, Karp-Rabin
     - [x] Recitation 9: Rolling Hashes, Amortized Analysis
-- [ ] Lecture 10: Open Addressing, Cryptographic Hashing
+- [x] Lecture 10: Open Addressing, Cryptographic Hashing
 - [ ] Lecture 11: Integer Arithmetic, Karatsuba Multiplication
 - [ ] Lecture 12: Square Roots, Newton's Method
 - [ ] Lecture 13: Breadth-First Search (BFS)
