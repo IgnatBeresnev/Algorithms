@@ -24,8 +24,8 @@ Progress:
 - [x] Lecture 9: Table Doubling, Karp-Rabin
     - [x] Recitation 9: Rolling Hashes, Amortized Analysis
 - [x] Lecture 10: Open Addressing, Cryptographic Hashing
-- [ ] Lecture 11: Integer Arithmetic, Karatsuba Multiplication
-- [ ] Lecture 12: Square Roots, Newton's Method
+- [x] Lecture 11: Integer Arithmetic, Karatsuba Multiplication
+- [x] Lecture 12: Square Roots, Newton's Method
 - [ ] Lecture 13: Breadth-First Search (BFS)
 - [ ] Lecture 14: Depth-First Search (DFS), Topological Sort
 - [ ] Lecture 15: Single-Source Shortest Paths Problem

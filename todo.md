@@ -19,6 +19,7 @@ move onto the todolist and finish it off (ha-ha).
 - [ ] Euclid algorithm
 - [ ] Z-count algorithm
 - [ ] Palindromes count
+- [ ] Add cipher
 
 ## Other
 - [ ] Correct javadoc, new format
