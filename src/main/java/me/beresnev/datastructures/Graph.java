@@ -38,6 +38,10 @@ public class Graph {
      * between two Vs. Access by index is constant.
      * Disadvantage: space complexity is v^2. Also, if you want to find
      * two adjacent nodes, it'll take a shitload of time. OK for dense.
+     * If graph is undirected, then we can save some space by storing
+     * only upper value for an edge (if [v1,v2] == 1, then we accept
+     * by default that in undirected [v2, v1] will also be 1, but there's
+     * no need to explicitly say that). Also, we can store weight instead of 1.
      * - Adjacency list. Basically each V has a list of it's neighbours
      * or edges (if you want to store weight, for example). Less space
      * consumption O(V+E), but a slightly worse performance when look up
@@ -117,7 +121,7 @@ public class Graph {
     }
 
     /**
-     * @see #solve() for details
+     * @see me.beresnev.algorithms.BFS for details
      */
     private static Map<Vertex, Integer> bfsLevels(Vertex Isenbaev) {
         Map<Vertex, Integer> level = new java.util.HashMap<>();
