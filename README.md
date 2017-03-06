@@ -26,7 +26,7 @@ Progress:
 - [x] Lecture 10: Open Addressing, Cryptographic Hashing
 - [x] Lecture 11: Integer Arithmetic, Karatsuba Multiplication
 - [x] Lecture 12: Square Roots, Newton's Method
-- [ ] Lecture 13: Breadth-First Search (BFS)
+- [x] Lecture 13: Breadth-First Search (BFS)
 - [ ] Lecture 14: Depth-First Search (DFS), Topological Sort
 - [ ] Lecture 15: Single-Source Shortest Paths Problem
 - [ ] Lecture 16: Dijkstra

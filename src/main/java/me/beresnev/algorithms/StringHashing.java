@@ -2,17 +2,21 @@ package me.beresnev.algorithms;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 02.03.17.
  */
 public class StringHashing {
 
+    /**
+     * One of the best ways to hash is to use this formula:
+     * h(S) = S[0] + S[1] * P + S[2] * P^2 + S[3] * P^3 + ... + S[N] * P^N
+     */
     private StringHashing() {
     }
 
     /**
-     * Standard JDK implementation as of Java 8. Uses prime 31
-     * and each character in the string, hashcode == sum
+     * Standard JDK implementation as of Java 8. Basically the same,
+     * but it's the reverted formula above.
      *
      * @param s input string
      * @return hashCode for a string based on value and prime 31
