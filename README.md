@@ -27,7 +27,9 @@ Progress:
 - [x] Lecture 11: Integer Arithmetic, Karatsuba Multiplication
 - [x] Lecture 12: Square Roots, Newton's Method
 - [x] Lecture 13: Breadth-First Search (BFS)
-- [ ] Lecture 14: Depth-First Search (DFS), Topological Sort
+    - [x] Recitation 13: Breadth-First Search (BFS)
+- [x] Lecture 14: Depth-First Search (DFS), Topological Sort
+    - [x] Recitation 14: Depth-First Search (DFS)
 - [ ] Lecture 15: Single-Source Shortest Paths Problem
 - [ ] Lecture 16: Dijkstra
 - [ ] Lecture 17: Bellman-Ford

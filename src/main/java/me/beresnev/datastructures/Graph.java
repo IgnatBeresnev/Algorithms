@@ -12,7 +12,7 @@ import java.util.TreeMap;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 06.03.17.
  */
 public class Graph {
@@ -53,7 +53,9 @@ public class Graph {
      * Properties:
      * - Self-loop. When a V points to itself. Website links to itself.
      * - Multi(Parallel)-edge. v1 and v2 may have different routes with diff. weight.
-     * - Degree. Number of edges coming from a V.
+     * - Degree. Number of edges coming from a V. In undir graph, edges*2=all degrees,
+     * for dir. graphs - out-degrees (N going out) and in-degrees (has N going in).
+     * Sum(in) + sum(out) = 2x #edges. If sum(out) >, then black-hole, don't come back.
      * - Dense. When #edges is very close to possible max. number of edges.
      * - Scarce. Opposite. When #edges is significantly < than max edges.
      * - Path. Sequence of Vs that are connected by edges.
