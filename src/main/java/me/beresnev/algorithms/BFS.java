@@ -1,14 +1,15 @@
 package me.beresnev.algorithms;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import me.beresnev.datastructures.Graph.Vertex;
 
-import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 07.03.17.
  */
 public class BFS {
@@ -28,7 +29,7 @@ public class BFS {
      * Can be used to find the shortest path from source to  node N.
      * In this case you'd have to store every node's parent, and once
      * you've found node N, you just go back, following the parent trail,
-     * all the way to the root.
+     * all the way to the root. Parent map is already there.
      */
     private BFS() {
     }
@@ -43,22 +44,25 @@ public class BFS {
      * To find the shortest path, add a param vertex you'd search for, and
      * once you've found it, follow the parent trail back to the root.
      * Might want to implement hashing for quicker comparisons of Vs.
+     *
+     * @return map<Vertex-Level>,
      */
     @SuppressFBWarnings("UC_USELESS_OBJECT") // parent map
+    @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection"})
     private static Map<Vertex, Integer> bfs(Vertex root) {
         Map<Vertex, Vertex> parent = new java.util.HashMap<>();
         Map<Vertex, Integer> level = new java.util.HashMap<>();
         level.put(root, 0);
 
-        Set<Vertex> frontier = new HashSet<>();
+        List<Vertex> frontier = new LinkedList<>();
         frontier.add(root);
 
-        int i = 1;
+        int i = 1; // level
         while (!frontier.isEmpty()) {
-            Set<Vertex> next = new HashSet<>();
+            List<Vertex> next = new LinkedList<>();
             for (Vertex u : frontier) {
                 if (u == null) break;
-                for (Vertex v : u.neighbours) {
+                for (Vertex v : u.getNeighbours()) {
                     if (!level.containsKey(v)) {
                         level.put(v, i);
                         parent.put(v, u);
@@ -70,19 +74,5 @@ public class BFS {
             i++;
         }
         return level;
-    }
-
-    private static class Vertex {
-        Set<Vertex> neighbours;
-        String label;
-
-        Vertex(String label) {
-            neighbours = new HashSet<>();
-            this.label = label;
-        }
-
-        public String toString() {
-            return label;
-        }
     }
 }

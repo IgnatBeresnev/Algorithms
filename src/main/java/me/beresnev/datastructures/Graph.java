@@ -2,13 +2,10 @@ package me.beresnev.datastructures;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * @author Ignat Beresnev
@@ -16,6 +13,7 @@ import java.util.TreeMap;
  * @since 06.03.17.
  */
 public class Graph {
+    private List<Vertex> vertices = new ArrayList<>();
 
     /**
      * Graph - set of V (vertices) and E (edges), where an edge
@@ -68,103 +66,67 @@ public class Graph {
      * - Walk length == number of edges.
      * - Acyclic graph - has no graph cycles, basically a tree.
      */
-    private Graph() {
+    public Graph() {
+    }
+
+    public void addVertex(Vertex a) {
+        vertices.add(a);
+    }
+
+    public List<Vertex> getVertices() {
+        return vertices;
     }
 
     /**
-     * This solve method solves the "Isenbaev number" problem found
-     * on Timus, also using BFS: http://acm.timus.ru/problem.aspx?space=1&num=1837
-     * It was accepcted by the system, and the total time and space cost
-     * are 0.078 and 230kb. First it builds an undirected, unweighted graph, and
-     * then uses BFS algorithm to get levels of all the nodes, which == result.
-     * <p>
-     * The input is in the resources with file name "Isenbaev input"
+     * Simple undirected and unweighted vertex
+     * in an average Adjacency-list representation.
+     * If you want to make it directed, just
+     * change the addNeighbour logic.
+     *
+     * Also, this class uses set because, I think,
+     * there's no point in having a linked list,
+     * which would allow multiple copies of the same
+     * Vertex, in an unweighted graph.
+     *
+     * One more thing - you might want to postpone
+     * the neighbours initialization until adding
+     * the first neighbour. That would save space.
+     *
+     * @see Edge for how to make edges weighted
      */
-    private static void solve() throws IOException {
-        TreeMap<String, Vertex> graph = buildGraph();
-        Map<Vertex, Integer> levels = bfsLevels(graph.get("Isenbaev"));
+    public static class Vertex {
+        private Set<Vertex> neighbours;
+        private String label;
 
-        for (Map.Entry<String, Vertex> entry : graph.entrySet()) {
-            Vertex value = entry.getValue();
-            if (!levels.containsKey(value))
-                System.out.println(entry.getKey() + " undefined");
-            else System.out.println(entry.getKey() + " " + levels.get(value));
-        }
-    }
-
-    /**
-     * @see #solve() for details
-     */
-    private static TreeMap<String, Vertex> buildGraph() throws IOException {
-        TreeMap<String, Vertex> vertexMap = new java.util.TreeMap<>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "ISO-8859-1"));
-
-        int times = Integer.parseInt(reader.readLine());
-
-        String line;
-        String[] surnames;
-        for (int j = 0; j < times; j++) {
-            line = reader.readLine();
-            if (line == null || line.isEmpty()) continue;
-            surnames = line.split("\\s+");
-            for (String surname : surnames) {
-                if (!vertexMap.containsKey(surname)) {
-                    Vertex newVertex = new Vertex(surname);
-                    vertexMap.put(surname, newVertex);
-                }
-            }
-            // I know there'll be 3 names only, so we need 1+2, 2+3, 3+1
-            for (int i = 0; i < surnames.length; i++) {
-                int second = i == 2 ? 0 : i + 1;
-                addEdge(vertexMap.get(surnames[i]), vertexMap.get(surnames[second]));
-            }
-        }
-        return vertexMap;
-    }
-
-    /**
-     * @see me.beresnev.algorithms.BFS for details
-     */
-    private static Map<Vertex, Integer> bfsLevels(Vertex Isenbaev) {
-        Map<Vertex, Integer> level = new java.util.HashMap<>();
-        level.put(Isenbaev, 0);
-
-        Set<Vertex> frontier = new HashSet<>();
-        frontier.add(Isenbaev);
-
-        int i = 1;
-        while (!frontier.isEmpty()) {
-            Set<Vertex> next = new HashSet<>();
-            for (Vertex u : frontier) {
-                if (u == null) break;
-                for (Vertex v : u.neighbours) {
-                    if (!level.containsKey(v)) {
-                        level.put(v, i);
-                        next.add(v);
-                    }
-                }
-            }
-            frontier = next;
-            i++;
-        }
-        return level;
-    }
-
-    /**
-     * For undirected graphs. If A -> B, then B -> A
-     */
-    private static void addEdge(Vertex one, Vertex two) {
-        one.neighbours.add(two);
-        two.neighbours.add(one);
-    }
-
-    private static class Vertex {
-        Set<Vertex> neighbours;
-        String label;
-
-        Vertex(String label) {
+        public Vertex(String label) {
             neighbours = new HashSet<>();
             this.label = label;
+        }
+
+        public void addNeighbour(Vertex a) {
+            neighbours.add(a);
+            a.neighbours.add(this);
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public Set<Vertex> getNeighbours() {
+            return neighbours;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Vertex vertex = (Vertex) o;
+            return label != null ? label.equals(vertex.label) : vertex.label == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return label != null ? label.hashCode() * 31 : 0;
         }
 
         public String toString() {
@@ -173,18 +135,25 @@ public class Graph {
     }
 
     /**
-     * If you want to add weight, then an object Edge might solve your problem.
-     * You'd have to restructure Vertex's neighbours set a little bit though.
-     * This class is not used in the problem solving, it's just for demonstration.
+     * If you want to make edges weighted, here's the list of changes:
+     * - Make neighbours in Vertex a list. We can have multiple edges
+     * from one V to another, they might have different weight.
+     * - Use Edge as generic in neighbours list. Instead of adding
+     * vertices to neighbours, add edges.
+     * - Add required getters/setters, generate equals & hashCode
+     * - If you want, you can leave only one Vertex inside the class,
+     * instead of storing two. That would require some changes in Vertex
+     * class and in general logic of the graph as well then.
      */
-    @SuppressFBWarnings({"UUF_UNUSED_FIELD", "URF_UNREAD_FIELD"})
+    @SuppressFBWarnings("URF_UNREAD_FIELD")
     private static class Edge {
-        Vertex one, two;
-        int weight;
+        private Vertex one, two;
+        private int weight;
 
-        public Edge(Vertex one, Vertex two) {
+        public Edge(Vertex one, Vertex two, int weight) {
             this.one = one;
             this.two = two;
+            this.weight = weight;
         }
     }
 }

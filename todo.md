@@ -10,16 +10,10 @@ move onto the todolist and finish it off (ha-ha).
 ## Algorithms and data structures
 - [ ] Add a binary insertion sort
 - [ ] Add a greedy algorithm
-- [ ] Euler function (e-maxx.ru)
-- [ ] Prefix function (e-maxx.ru)
 - [ ] Red and black tree balancing
 - [ ] Pigeonhole sort
-- [ ] Expand hashCode, read Bloch's answer
 - [ ] null sorting, null comparison
-- [ ] Euclid algorithm
-- [ ] Z-count algorithm
-- [ ] Palindromes count
-- [ ] Add cipher
+- [ ] add Matrix graph
 
 ## Other
 - [ ] Correct javadoc, new format
