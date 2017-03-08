@@ -50,10 +50,10 @@ public class DFS {
      * - Cross edge. The rest. They might connect Vs that are from different
      * trees or Vs where neither is the ancestor.
      */
-    protected DFS() {
+    private DFS() {
     }
 
-    protected static DFSResult DFS(Graph g) {
+    public static DFSResult DFS(Graph g) {
         DFSResult result = new DFSResult();
         for (Vertex v : g.getVertices()) {
             if (!result.parent.containsKey(v)) {
