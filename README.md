@@ -30,8 +30,9 @@ Progress:
     - [x] Recitation 13: Breadth-First Search (BFS)
 - [x] Lecture 14: Depth-First Search (DFS), Topological Sort
     - [x] Recitation 14: Depth-First Search (DFS)
-- [ ] Lecture 15: Single-Source Shortest Paths Problem
-- [ ] Lecture 16: Dijkstra
+- [x] Lecture 15: Single-Source Shortest Paths Problem
+    - [x] Recitation 15: Shortest Paths
+- [x] Lecture 16: Dijkstra
 - [ ] Lecture 17: Bellman-Ford
 - [ ] Lecture 18: Speeding up Dijkstra
 - [ ] Lecture 19: Dynamic Programming I: Fibonacci, Shortest Paths
