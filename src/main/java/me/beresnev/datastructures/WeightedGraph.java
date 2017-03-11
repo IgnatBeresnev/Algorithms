@@ -1,17 +1,17 @@
 package me.beresnev.datastructures;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 1.1
  * @since 09.03.17.
  */
 public class WeightedGraph {
-    private List<Vertex> vertices = new ArrayList<>();
+    private List<Vertex> vertices = new LinkedList<>();
 
     public WeightedGraph() {
     }

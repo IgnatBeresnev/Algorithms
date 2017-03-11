@@ -23,18 +23,17 @@ public class Dijkstra {
 
         while (!queue.isEmpty()) {
             Vertex v = queue.poll();
-            if (v.dist == Integer.MAX_VALUE) continue; // int overflow
+            if (v.dist == Integer.MAX_VALUE) continue;
             for (Edge edge : v.edges) {
                 relax(v, edge.vertex, edge.weight);
             }
         }
     }
 
-    // u - min vertex from the queue, v - edge(u, v), weight = w(u, v)
-    private static void relax(Vertex u, Vertex v, int weight) {
-        if (v.dist > (u.dist + weight)) {
-            v.dist = u.dist + weight;
-            v.parent = u;
+    private static void relax(Vertex v, Vertex e, int weight) {
+        if (e.dist > (v.dist + weight)) {
+            e.dist = v.dist + weight;
+            e.parent = v;
         }
     }
 }

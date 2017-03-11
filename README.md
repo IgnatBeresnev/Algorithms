@@ -33,8 +33,8 @@ Progress:
 - [x] Lecture 15: Single-Source Shortest Paths Problem
     - [x] Recitation 15: Shortest Paths
 - [x] Lecture 16: Dijkstra
-- [ ] Lecture 17: Bellman-Ford
-- [ ] Lecture 18: Speeding up Dijkstra
+- [x] Lecture 17: Bellman-Ford
+- [x] Lecture 18: Speeding up Dijkstra
 - [ ] Lecture 19: Dynamic Programming I: Fibonacci, Shortest Paths
 - [ ] Lecture 20: Dynamic Programming II: Text Justification, Blackjack
 - [ ] Lecture 21: Dynamic Programming III: Parenthesization, Edit Distance, Knapsack
