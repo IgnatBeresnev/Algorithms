@@ -35,7 +35,7 @@ Progress:
 - [x] Lecture 16: Dijkstra
 - [x] Lecture 17: Bellman-Ford
 - [x] Lecture 18: Speeding up Dijkstra
-- [ ] Lecture 19: Dynamic Programming I: Fibonacci, Shortest Paths
+- [x] Lecture 19: Dynamic Programming I: Fibonacci, Shortest Paths
 - [ ] Lecture 20: Dynamic Programming II: Text Justification, Blackjack
 - [ ] Lecture 21: Dynamic Programming III: Parenthesization, Edit Distance, Knapsack
 - [ ] Lecture 22: Dynamic Programming IV: Guitar Fingering, Tetris, Super Mario Bros.
