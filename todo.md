@@ -14,4 +14,4 @@ move onto the todolist and finish it off (ha-ha).
 - [ ] add Matrix graph
 
 ## Other
-- [ ] Correct javadoc
+- [x] Correct javadoc
