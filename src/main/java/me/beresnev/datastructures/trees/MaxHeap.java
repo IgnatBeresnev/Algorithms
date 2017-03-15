@@ -2,33 +2,36 @@ package me.beresnev.datastructures.trees;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 2.0
  * @since 18.02.17.
  */
-public class MaxHeap extends Heap {
+public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
 
     public MaxHeap() {
         super();
-    }
-
-    public MaxHeap(int[] arr) {
-        super(arr);
     }
 
     /**
      * @param branch index of the branch element to heapify
      * @see me.beresnev.datastructures.trees.Heap#heapify(int)
      */
+    @SuppressWarnings("unchecked")
     protected void heapify(int branch) {
         int leftChild = leftChild(branch);
         int rightChild = rightChild(branch);
 
+        if (!areNodesAvailable(leftChild, rightChild)) {
+            return;
+        }
+
         int largestValueIndex = branch;
-        if (leftChild <= elementPointer - 1 && array[leftChild] > array[branch]) {
+        int comparison = array[leftChild].compareTo(array[branch]);
+        if (leftChild <= elementPointer - 1 && comparison > 0) {
             largestValueIndex = leftChild;
         }
 
-        if (rightChild <= elementPointer - 1 && array[rightChild] > array[largestValueIndex]) {
+        comparison = array[rightChild].compareTo(array[largestValueIndex]);
+        if (rightChild <= elementPointer - 1 && comparison > 0) {
             largestValueIndex = rightChild;
         }
 
@@ -42,11 +45,15 @@ public class MaxHeap extends Heap {
      * @param branch index of the branch to check the structure.
      * @see me.beresnev.datastructures.trees.Heap#checkHeapStructureBottomUp(int)
      */
+    @SuppressWarnings("unchecked")
     @Override
     void checkHeapStructureBottomUp(int branch) {
-        if (array[parent(branch)] <= array[branch] && branch != 0) {
+        int comparison = array[parent(branch)].compareTo(array[branch]);
+        if (branch != 0 && comparison <= 0) {
             swap(parent(branch), branch);
             checkHeapStructureBottomUp(parent(branch));
         }
     }
+
+
 }

@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 /**
  * @author Ignat Beresnev
- * @version 1.0
+ * @version 2.0
  * @since 18.02.17.
  */
-public abstract class Heap {
+public abstract class Heap<T> {
     private static final int DEFAULT_SIZE = 10;
-    int[] array; // values
+    T[] array; // values
 
     // This basically represents the true size of the array
     // points at the element (last added + 1)
@@ -28,21 +28,9 @@ public abstract class Heap {
      * Space complexity:
      * O(n)
      */
+    @SuppressWarnings("unchecked")
     Heap() {
-        array = new int[DEFAULT_SIZE];
-    }
-
-    /**
-     * Constructs a heap from the given array.
-     */
-    Heap(int[] arr) {
-        size = arr.length;
-        array = new int[size];
-        System.arraycopy(arr, 0, array, 0, arr.length);
-        elementPointer = array.length;
-        for (int i = (size - 1) / 2; i >= 0; i--) {
-            heapify(i);
-        }
+        array = (T[]) new Comparable[DEFAULT_SIZE];
     }
 
     /**
@@ -65,7 +53,7 @@ public abstract class Heap {
      *
      * @param value new value of root
      */
-    public void changeRootValue(int value) {
+    public void changeRootValue(T value) {
         array[0] = value;
         heapify(0);
     }
@@ -76,7 +64,7 @@ public abstract class Heap {
      *
      * @param value int to add to the heap
      */
-    public void add(int value) {
+    public void add(T value) {
         if (elementPointer >= array.length)
             grow();
 
@@ -89,13 +77,13 @@ public abstract class Heap {
      * @return return and remove the root element (biggest/smallest).
      * @throws NullPointerException if root element is null/empty
      */
-    public int remove() throws NullPointerException {
+    public T removeFirst() throws NullPointerException {
         if (elementPointer == 0)
             throw new NullPointerException("No root found");
-        int rootValue = array[0];
+        T rootValue = array[0];
 
         array[0] = array[elementPointer - 1]; // with -1 it returns the last element in the array
-        array[elementPointer - 1] = 0;
+        array[elementPointer - 1] = null;
         elementPointer--; // "decreasing" size of the array since we removed root element (changed to 0)
         // now pointer points at an empty element (0), ready for insertion.
         heapify(0);
@@ -108,8 +96,12 @@ public abstract class Heap {
      *
      * @return root element (biggest/smallest)
      */
-    public int examine() {
+    public T examine() {
         return array[0];
+    }
+
+    public int size() {
+        return size;
     }
 
     /**
@@ -143,7 +135,7 @@ public abstract class Heap {
     }
 
     void swap(int a, int b) {
-        int temp = array[a];
+        T temp = array[a];
         array[a] = array[b];
         array[b] = temp;
     }
@@ -160,6 +152,17 @@ public abstract class Heap {
         return leftChild(branch) + 1;
     }
 
+    /**
+     * Don't want to get nullPointer or arrayIndexOutOfBounds, do we?
+     */
+    boolean areNodesAvailable(int leftChild, int rightChild) {
+        if (leftChild > elementPointer || rightChild > elementPointer) {
+            return false;
+        } else if (array[leftChild] == null || array[rightChild] == null) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Instead of returning a toString of the array, majority of which
