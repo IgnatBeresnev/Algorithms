@@ -1,4 +1,4 @@
-package me.beresnev.algorithms;
+package me.beresnev.algorithms.graphs;
 
 import me.beresnev.datastructures.WeightedGraph;
 import me.beresnev.datastructures.WeightedGraph.Vertex;
@@ -25,11 +25,11 @@ public class DijkstraTest {
         Vertex x = new Vertex("x");
         Vertex y = new Vertex("y");
         Vertex z = new Vertex("z");
+        graph.addVertex(y);
+        graph.addVertex(t);
         graph.addVertex(z);
         graph.addVertex(s);
         graph.addVertex(x);
-        graph.addVertex(y);
-        graph.addVertex(t);
 
         s.addEdge(t, 10);
         s.addEdge(y, 5);

@@ -86,7 +86,7 @@ public abstract class Heap {
     }
 
     /**
-     * @return and remove the root element (biggest/smallest).
+     * @return return and remove the root element (biggest/smallest).
      * @throws NullPointerException if root element is null/empty
      */
     public int remove() throws NullPointerException {

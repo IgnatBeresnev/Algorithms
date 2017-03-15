@@ -1,4 +1,4 @@
-package me.beresnev.algorithms;
+package me.beresnev.algorithms.graphs;
 
 import me.beresnev.datastructures.Graph;
 import me.beresnev.datastructures.Graph.Vertex;

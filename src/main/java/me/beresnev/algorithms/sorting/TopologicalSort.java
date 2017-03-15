@@ -1,6 +1,6 @@
 package me.beresnev.algorithms.sorting;
 
-import me.beresnev.algorithms.DFS;
+import me.beresnev.algorithms.graphs.DFS;
 import me.beresnev.datastructures.Graph;
 
 import java.util.Collections;

@@ -1,5 +1,7 @@
 package me.beresnev.algorithms.Timus;
 
+import me.beresnev.algorithms.graphs.BFS;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -66,7 +68,7 @@ public class IsenbaevNumber {
     }
 
     /**
-     * @see me.beresnev.algorithms.BFS for details
+     * @see BFS for details
      */
     private static Map<Vertex, Integer> bfsLevels(Vertex Isenbaev) {
         Map<Vertex, Integer> level = new java.util.HashMap<>();

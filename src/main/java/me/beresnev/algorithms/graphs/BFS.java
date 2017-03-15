@@ -1,4 +1,4 @@
-package me.beresnev.algorithms;
+package me.beresnev.algorithms.graphs;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import me.beresnev.datastructures.Graph.Vertex;
