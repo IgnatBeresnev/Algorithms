@@ -1,4 +1,4 @@
-package me.beresnev.algorithms;
+package me.beresnev.algorithms.math;
 
 /**
  * @author Ignat Beresnev

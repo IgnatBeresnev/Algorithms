@@ -1,5 +1,6 @@
 package me.beresnev.algorithms;
 
+import me.beresnev.algorithms.math.BinaryPow;
 import org.junit.Assert;
 import org.junit.Test;
 

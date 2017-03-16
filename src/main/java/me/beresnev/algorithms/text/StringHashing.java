@@ -1,4 +1,6 @@
-package me.beresnev.algorithms;
+package me.beresnev.algorithms.text;
+
+import me.beresnev.algorithms.math.BinaryPow;
 
 /**
  * @author Ignat Beresnev

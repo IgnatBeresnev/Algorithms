@@ -1,4 +1,4 @@
-package me.beresnev.algorithms;
+package me.beresnev.algorithms.math;
 
 import java.util.Arrays;
 import java.util.LinkedList;

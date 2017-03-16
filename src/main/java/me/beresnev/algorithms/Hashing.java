@@ -1,5 +1,7 @@
 package me.beresnev.algorithms;
 
+import me.beresnev.algorithms.text.StringHashing;
+
 /**
  * @author Ignat Beresnev
  * @version 1.0

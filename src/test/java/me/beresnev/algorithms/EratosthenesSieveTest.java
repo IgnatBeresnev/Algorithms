@@ -1,6 +1,7 @@
 package me.beresnev.algorithms;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import me.beresnev.algorithms.math.EratosthenesSieve;
 import org.junit.Assert;
 import org.junit.Test;
 

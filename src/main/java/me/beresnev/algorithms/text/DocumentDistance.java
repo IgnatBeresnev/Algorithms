@@ -1,4 +1,4 @@
-package me.beresnev.algorithms;
+package me.beresnev.algorithms.text;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 

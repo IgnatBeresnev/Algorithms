@@ -1,5 +1,6 @@
 package me.beresnev.algorithms;
 
+import me.beresnev.algorithms.math.FibonacciNumber;
 import org.junit.Test;
 
 /**
