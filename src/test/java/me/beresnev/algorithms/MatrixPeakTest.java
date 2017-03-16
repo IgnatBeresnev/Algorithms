@@ -1,5 +1,6 @@
 package me.beresnev.algorithms;
 
+import me.beresnev.algorithms.searching.MatrixPeak;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
