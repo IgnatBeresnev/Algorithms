@@ -1,13 +1,53 @@
 # Algorithms & Data Structures
-Here I'll be implementing the majority of popular algorithms and data structures that I know.
+Here I'll be implementing the majority of popular algorithms and data structures that I come across.
 
-## Pull requests
-If you want to push some Algorithm implementations / Data Structures of your own - I'm sorry, I will not accept it since this repository is intented for studying only. Therefore, I should go through every existing structure and algorithm myself.
-
-**However**, if you want to correct some mistakes of mine or suggest/push **additional**  in-class implementations (for example, you know a recursive implementation of a method I have), you're more than welcome to do that.
+## Table of contents
+### Algorithms
+- Sorting
+    - [Bubble sort](/src/main/java/me/beresnev/algorithms/sorting/BubbleSort.java)
+    - [Insertion sort](/src/main/java/me/beresnev/algorithms/sorting/InsertionSort.java)
+    - [Heap sort](/src/main/java/me/beresnev/algorithms/sorting/HeapSort.java)
+    - [Merge sort](/src/main/java/me/beresnev/algorithms/sorting/MergeSort.java)
+    - [Bucket sort](/src/main/java/me/beresnev/algorithms/sorting/BucketSort.java)
+    - [Counting sort](/src/main/java/me/beresnev/algorithms/sorting/CountingSort.java)
+    - [Radix sort](/src/main/java/me/beresnev/algorithms/sorting/RadixSort.java)
+    - [Topological sort](/src/main/java/me/beresnev/algorithms/sorting/TopologicalSort.java)
+- Graphs
+    - [BFS](/src/main/java/me/beresnev/algorithms/graphs/BFS.java)
+    - [DFS](/src/main/java/me/beresnev/algorithms/graphs/DFS.java)
+    - [Dijkstra](/src/main/java/me/beresnev/algorithms/graphs/Dijkstra.java)
+    - [Bellman-Ford](/src/main/java/me/beresnev/algorithms/graphs/BellmanFord.java)
+- Maths
+    - [Binary powering](/src/main/java/me/beresnev/algorithms/math/BinaryPow.java)
+    - [Sieve of Eratosthenes](/src/main/java/me/beresnev/algorithms/math/EratosthenesSieve.java)
+    - [Fibonacci number](/src/main/java/me/beresnev/algorithms/math/FibonacciNumber.java)
+- Searching
+    - [Binary search](/src/main/java/me/beresnev/algorithms/searching/BinarySearch.java)  
+    - [1D Array Peak](/src/main/java/me/beresnev/algorithms/searching/ArrayPeak.java)
+    - [2D Matrix Peak](/src/main/java/me/beresnev/algorithms/searching/MatrixPeak.java)
+- Text
+    - [Rabin-Karp](/src/main/java/me/beresnev/algorithms/text/RabinKarp.java)
+    - [String hashing (Rolling hash)](/src/main/java/me/beresnev/algorithms/text/StringHashing.java)
+    - [Document distance](/src/main/java/me/beresnev/algorithms/text/DocumentDistance.java)
+- Timus
+    - [Isenbaev number](/src/main/java/me/beresnev/algorithms/Timus/IsenbaevNumber.java)
+    
+## Data Structures
+- Trees
+    - [AVL](/src/main/java/me/beresnev/datastructures/trees/AVL.java)
+    - [BST](/src/main/java/me/beresnev/datastructures/trees/BinarySearchTree.java)
+    - [Heap (abstract)](/src/main/java/me/beresnev/datastructures/trees/Heap.java)
+    - [MinHeap](/src/main/java/me/beresnev/datastructures/trees/MinHeap.java)
+    - [MaxHeap](/src/main/java/me/beresnev/datastructures/trees/MaxHeap.java)
+- Maps
+    - [Hashmap](/src/main/java/me/beresnev/datastructures/HashMap.java)
+    - [Open Addressing](/src/main/java/me/beresnev/datastructures/OpenAddressing.java)
+- Graphs
+    - [Graph (unweighted, undir)](/src/main/java/me/beresnev/datastructures/Graph.java)
+    - [Weighted graph (directed)](/src/main/java/me/beresnev/datastructures/WeightedGraph.java)
 
 ## MIT 6.006
-I'm also following **MIT's** [6.006 Introduction to Algorithms](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/) program. Here you can find given material implemented in Java.
+I'm also following **MIT's** [6.006 Introduction to Algorithms](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/) course. Here you can find given material implemented in Java.
 
 Progress:
 - [x] Lecture 1: Algorithmic Thinking, Peak Finding
@@ -36,7 +76,7 @@ Progress:
 - [x] Lecture 17: Bellman-Ford
 - [x] Lecture 18: Speeding up Dijkstra
 - [x] Lecture 19: Dynamic Programming I: Fibonacci, Shortest Paths
-- [ ] Lecture 20: Dynamic Programming II: Text Justification, Blackjack
+- [x] Lecture 20: Dynamic Programming II: Text Justification, Blackjack
 - [ ] Lecture 21: Dynamic Programming III: Parenthesization, Edit Distance, Knapsack
 - [ ] Lecture 22: Dynamic Programming IV: Guitar Fingering, Tetris, Super Mario Bros.
 - [ ] Lecture 23: Computational Complexity
